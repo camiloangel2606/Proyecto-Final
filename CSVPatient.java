@@ -45,7 +45,7 @@ public class CSVPatient {
     }
 
     // Método para escribir la información de los pacientes en un archivo CSV
-    private static void writeToFile(String filePath, List<Patient> patients) throws IOException {
+    static void writeToFile(String filePath, List<Patient> patients) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Patient patient : patients) {
                 String line = String.join(",", Integer.toString(patient.getPatientId()), patient.getFullName(),
