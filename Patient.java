@@ -90,6 +90,7 @@ public class Patient {
         }
         patientList.add(newPatient);
         System.out.println("Se agregó correctamentamente al paciente.");
+        CSVPatient.saveInfo(patientList); // Guardamos la lista actualizada en archivos CSV.
     }
 
     public static void removePatient(int PatientId) {
@@ -102,6 +103,7 @@ public class Patient {
             }
         }
         System.out.println("No se encontró ningún paciente con el ID especificado.");
+        CSVPatient.saveInfo(patientList); // Guardamos la lista actualizada en archivos CSV.
     }
 
     public static void updatePatient(int patientId, String fullName, int age, float weight, float height,
@@ -117,6 +119,7 @@ public class Patient {
             }
         }
         System.out.println("Se actualizó correctamente la información del paciente.");
+        CSVPatient.saveInfo(patientList); // Guardamos la lista actualizada en archivos CSV.
     }
 
     public static void printPatientList() {
@@ -124,4 +127,5 @@ public class Patient {
             System.out.println(patient);
         }
     }
+
 }

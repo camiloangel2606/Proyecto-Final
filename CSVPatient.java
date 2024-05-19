@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -7,8 +8,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PatientManager {
-    private static final String CSV_FILE_PATH = "data/Patients.csv";
+public class CSVPatient {
+    private static final String CSV_FILE_PATH = "data/Patients.csv"; // Mover la constante fuera de cualquier método
+
+    public static void main(String[] args) {
+        // Aquí puedes llamar a los métodos de carga y guardado según sea necesario
+        loadInfo();
+        // Si necesitas guardar la información, crea una lista de pacientes y llama a
+        // saveInfo()
+    }
 
     // Método para cargar la información de los pacientes desde un archivo CSV
     public static void loadInfo() {
@@ -55,14 +63,14 @@ public class PatientManager {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                int PatientId = Integer.parseInt(parts[0]);
-                String FullName = parts[1];
-                int Age = Integer.parseInt(parts[2]);
-                float Weight = Float.parseFloat(parts[3]);
-                float Height = Float.parseFloat(parts[4]);
-                String[] PreexistingConditions = parts[5].split(";");
-                List<String> preexistingConditionsList = Arrays.asList(PreexistingConditions);
-                Patient patient = new Patient(PatientId, FullName, Age, Weight, Height, preexistingConditionsList);
+                int patientId = Integer.parseInt(parts[0]);
+                String fullName = parts[1];
+                int age = Integer.parseInt(parts[2]);
+                float weight = Float.parseFloat(parts[3]);
+                float height = Float.parseFloat(parts[4]);
+                String[] preexistingConditions = parts[5].split(";");
+                List<String> preexistingConditionsList = Arrays.asList(preexistingConditions);
+                Patient patient = new Patient(patientId, fullName, age, weight, height, preexistingConditionsList);
                 patients.add(patient);
             }
         }

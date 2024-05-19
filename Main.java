@@ -5,6 +5,7 @@ public class Main {
         Patient.addPatient(1, "John Doe", 30, 70.5f, 180.2f, new String[] { "Diabetes", "Hypertension" });
         Patient.addPatient(2, "Jane Smith", 25, 60.0f, 170.5f, new String[] { "Asthma" });
         Patient.printPatientList();
+        Dietitian.printPatientList();
 
         // Menú:
         System.out.println("Bienvenido al sistema de Dietas para Pacientes.");
@@ -85,9 +86,38 @@ public class Main {
                 } while (j != 0);
             } else if (i == 2) { // Registro y gestión de nutricionistas.
                 // Lógica para gestión de nutricionistas.
+                int l = 0;
+                do {
+                    System.out.println("Ingresa la función a realizar.");
+                    System.out.println("(1) Registrar un nuevo nutricionista.");
+                    System.out.println("(2) Asignar un nutricionista a un paciente.");
+                    System.out.println("(0) Regresar al menú principal.");
+                    l = Integer.parseInt(scanner.nextLine());
+
+                    if (l == 1) {
+                        System.out.println("Ingresa el id del nutricionista.");
+                        int dietitianId = Integer.parseInt(scanner.nextLine());
+                        System.out.println("Ingresa el nombre del nutricionista.");
+                        String FullName = scanner.nextLine();
+                        System.out.println("Ingresa las especialidades del nutricionista separadas por ','");
+                        String preexistingConditions = scanner.nextLine();
+
+                        // Divide la entrada en partes individuales usando el delimitador ","
+                        String[] preexistingConditionsArray = preexistingConditions.split(",");
+
+                        // Elimina los espacios en blanco alrededor de cada condición
+                        for (int k = 0; k < preexistingConditionsArray.length; k++) {
+                            preexistingConditionsArray[k] = preexistingConditionsArray[k].trim();
+                        }
+
+                        Dietitian.addDietitian(dietitianId, FullName, preexistingConditionsArray);
+                    }
+                } while (l != 0);
             }
         } while (i != 0);
+
         Patient.printPatientList();
+        Dietitian.printPatientList();
         scanner.close();
     }
 }
