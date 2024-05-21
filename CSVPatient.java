@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -9,24 +8,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CSVPatient {
-    private static final String CSV_FILE_PATH = "data/Patients.csv"; // Mover la constante fuera de cualquier método
+    private static final String CSV_FILE_PATH = "Patients.csv"; // Asegúrate de que la ruta es correcta
 
-    public static void main(String[] args) {
-        // Aquí puedes llamar a los métodos de carga y guardado según sea necesario
-        loadInfo();
-        // Si necesitas guardar la información, crea una lista de pacientes y llama a
-        // saveInfo()
-    }
-
-    // Método para cargar la información de los pacientes desde un archivo CSV
     public static void loadInfo() {
         List<Patient> patients = new ArrayList<>();
         try {
             readFromFile(CSV_FILE_PATH, patients);
             for (Patient patient : patients) {
-                // Aquí puedes hacer lo que necesites con cada paciente, como agregarlo a una
-                // lista de pacientes
-                System.out.println(patient); // Por ejemplo, imprimir cada paciente
+                Patient.addPatientToList(patient); // Agregar paciente a la lista estática
             }
             System.out.println("Información de pacientes cargada exitosamente.");
         } catch (IOException e) {
@@ -34,7 +23,6 @@ public class CSVPatient {
         }
     }
 
-    // Método para guardar la información de los pacientes en un archivo CSV
     public static void saveInfo(List<Patient> patients) {
         try {
             writeToFile(CSV_FILE_PATH, patients);
@@ -44,8 +32,7 @@ public class CSVPatient {
         }
     }
 
-    // Método para escribir la información de los pacientes en un archivo CSV
-    static void writeToFile(String filePath, List<Patient> patients) throws IOException {
+    private static void writeToFile(String filePath, List<Patient> patients) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Patient patient : patients) {
                 String line = String.join(",", Integer.toString(patient.getPatientId()), patient.getFullName(),
@@ -57,7 +44,6 @@ public class CSVPatient {
         }
     }
 
-    // Método para leer la información de los pacientes desde un archivo CSV
     private static void readFromFile(String filePath, List<Patient> patients) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;

@@ -23,7 +23,6 @@ public class Patient {
         this.preexistingConditions = preexistingConditions;
     }
 
-    // Métodos getters y setters para los campos
     public int getPatientId() {
         return patientId;
     }
@@ -41,7 +40,7 @@ public class Patient {
     }
 
     public int getAge() {
-        return age;
+        return 2024 - age; // Pide el año de nacimiento para así no tener la necesidad de actualizar.
     }
 
     public void setAge(int age) {
@@ -82,28 +81,32 @@ public class Patient {
             String[] preexistingConditions) {
         List<String> preexistingConditionsList = Arrays.asList(preexistingConditions);
         Patient newPatient = new Patient(patientId, fullName, age, weight, height, preexistingConditionsList);
-        for (Iterator<Patient> iterator = patientList.iterator(); iterator.hasNext();) {
-            Patient patient = iterator.next();
+        for (Patient patient : patientList) {
             if (patient.getPatientId() == patientId) {
                 System.out.println("El paciente ya se encuentra agregado.");
+                return;
             }
         }
         patientList.add(newPatient);
-        System.out.println("Se agregó correctamentamente al paciente.");
+        System.out.println("Se agregó correctamente al paciente.");
         CSVPatient.saveInfo(patientList); // Guardamos la lista actualizada en archivos CSV.
     }
 
-    public static void removePatient(int PatientId) {
+    public static void addPatientToList(Patient patient) {
+        patientList.add(patient);
+    }
+
+    public static void removePatient(int patientId) {
         for (Iterator<Patient> iterator = patientList.iterator(); iterator.hasNext();) {
             Patient patient = iterator.next();
-            if (patient.getPatientId() == PatientId) {
+            if (patient.getPatientId() == patientId) {
                 iterator.remove(); // Elimina el paciente de la lista
                 System.out.println("Paciente eliminado exitosamente.");
+                CSVPatient.saveInfo(patientList); // Guardamos la lista actualizada en archivos CSV.
                 return; // Salir del método una vez que se elimine el paciente
             }
         }
         System.out.println("No se encontró ningún paciente con el ID especificado.");
-        CSVPatient.saveInfo(patientList); // Guardamos la lista actualizada en archivos CSV.
     }
 
     public static void updatePatient(int patientId, String fullName, int age, float weight, float height,
@@ -115,11 +118,12 @@ public class Patient {
                 patient.setWeight(weight);
                 patient.setHeight(height);
                 patient.setPreexistingConditions(Arrays.asList(preexistingConditions));
-                break;
+                CSVPatient.saveInfo(patientList); // Guardamos la lista actualizada en archivos CSV.
+                System.out.println("Se actualizó correctamente la información del paciente.");
+                return;
             }
         }
-        System.out.println("Se actualizó correctamente la información del paciente.");
-        CSVPatient.saveInfo(patientList); // Guardamos la lista actualizada en archivos CSV.
+        System.out.println("No se encontró ningún paciente con el ID especificado.");
     }
 
     public static void printPatientList() {
@@ -127,5 +131,4 @@ public class Patient {
             System.out.println(patient);
         }
     }
-
 }
