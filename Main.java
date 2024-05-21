@@ -5,6 +5,8 @@ public class Main {
         // Cargar información de los pacientes desde el archivo CSV al inicio del
         // programa
         CSVPatient.loadInfo();
+        CSVDietitian.loadInfo();
+
         Patient.addPatient(1, "John Doe", 30, 70.5f, 180.2f, new String[] { "Diabetes", "Hypertension" });
         Patient.addPatient(2, "Jane Smith", 25, 60.0f, 170.5f, new String[] { "Asthma" });
         Patient.printPatientList();
@@ -120,7 +122,7 @@ public class Main {
         } while (i != 0);
 
         Patient.printPatientList();
-        Dietitian.printPatientList();
+        Dietitian.printdietitianList();
         scanner.close();
     }
 }

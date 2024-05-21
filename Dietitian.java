@@ -10,15 +10,15 @@ public class Dietitian extends Patient {
 
     public Dietitian(int dietitianId, String fullName, List<String> preexistingConditions) {
         // Llamada al constructor de la clase madre (Patient)
-        super(dietitianId, fullName, 0, 0.0f, 0.0f, preexistingConditions);
+        super(dietitianId, capitalizeName(fullName), 0, 0.0f, 0.0f, preexistingConditions);
         this.dietitianId = dietitianId;
-        this.fullName = fullName;
+        this.fullName = capitalizeName(fullName);
         this.preexistingConditions = preexistingConditions;
     }
 
     @Override
     public void setFullName(String fullName) {
-        this.fullName = fullName;
+        this.fullName = capitalizeName(fullName);
     }
 
     @Override
@@ -46,22 +46,50 @@ public class Dietitian extends Patient {
         return this.preexistingConditions;
     }
 
-    public static void addDietitian(int patientId, String fullName, String[] preexistingConditions) {
+    // Método para capitalizar la primera letra de cada palabra
+    public static String capitalizeName(String name) {
+        String[] words = name.split("\\s+");
+        StringBuilder capitalized = new StringBuilder();
+
+        for (String word : words) {
+            if (word.length() > 0) {
+                capitalized.append(Character.toUpperCase(word.charAt(0)))
+                        .append(word.substring(1).toLowerCase())
+                        .append(" ");
+            }
+        }
+        return capitalized.toString().trim();
+    }
+
+    public static void addDietitian(int dietitianId, String fullName, String[] preexistingConditions) {
         List<String> preexistingConditionsList = Arrays.asList(preexistingConditions);
-        Dietitian newDietitian = new Dietitian(patientId, fullName, preexistingConditionsList);
+        String capitalizedFullName = capitalizeName(fullName); // Capitalizar el nombre aquí
+        Dietitian newDietitian = new Dietitian(dietitianId, capitalizedFullName, preexistingConditionsList);
         for (Dietitian dietitian : dietitianList) {
-            if (dietitian.getPatientId() == patientId) {
-                System.out.println("El Nutricionista" + fullName + "ya se encuentra agregado.");
+            if (dietitian.getPatientId() == dietitianId) {
+                System.out.println("El Nutricionista " + capitalizedFullName + " ya se encuentra agregado.");
                 return;
             }
         }
         dietitianList.add(newDietitian);
-        System.out.println("Se agregó correctamente al nutricionista " + fullName + ".");
+        CSVDietitian.saveInfo(dietitianList);
+
+        System.out.println("Se agregó correctamente al nutricionista " + capitalizedFullName + ".");
+    }
+
+    public static void addDietitianToList(Dietitian dietitian) {
+        dietitianList.add(dietitian);
     }
 
     @Override
     public String toString() {
         return "Dietitian[DietitianId:" + dietitianId + ", FullName:" + fullName +
-                ", Specialitys:" + preexistingConditions + "]";
+                ", Specialities:" + preexistingConditions + "]";
+    }
+
+    public static void printdietitianList() {
+        for (Patient dietitian : dietitianList) {
+            System.out.println(dietitian);
+        }
     }
 }
