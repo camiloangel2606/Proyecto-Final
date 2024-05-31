@@ -2,6 +2,7 @@ import Helpers.CSVPatient;
 import Models.Dietitian;
 import Models.Meal;
 import Models.Patient;
+import Models.DietPlan;
 import Helpers.CSVDietitian;
 
 import java.util.ArrayList;
@@ -58,32 +59,46 @@ public class Main {
 
     // Method to generate a meal plan
 private static void generateMealPlan(Scanner scanner) {
-    // Código para registrar una comida
-    System.out.println("Ingresa los detalles de la comida:");
-    System.out.print("Nombre: ");
-    String name = scanner.nextLine();
-    System.out.print("Macronutrientes: ");
-    String macronutrients = scanner.nextLine();
-    System.out.print("Calorías: ");
-    int calories = scanner.nextInt();
+    System.out.println("Ingresa el ID del paciente:");
+    int patientId = scanner.nextInt();
     scanner.nextLine(); // Consumir el salto de línea pendiente
 
-    //The user should to write (yes or yes) the 3 words
-    System.out.print("Time of day (morning, afternoon, evening): ");
-    String timeOfDay = scanner.nextLine();
-    while (!timeOfDay.equals("morning") && !timeOfDay.equals("afternoon") && !timeOfDay.equals("evening")) {
-        System.out.println("Invalid input. Please enter 'morning', 'afternoon', or 'evening'.");
-        System.out.print("Time of day (morning, afternoon, evening): ");
-        timeOfDay = scanner.nextLine();
+    Patient patient = Patient.getPatientById(patientId);
+    if (patient == null) {
+        System.out.println("No se encontró un paciente con el ID proporcionado.");
+        return;
     }
+
+    Dietitian dietitian = null; // Aquí debes obtener el dietitian correspondiente al paciente
+
+    // Solicitar al usuario los detalles del plan de alimentación
+    System.out.println("Ingresa los detalles del plan de alimentación:");
+    System.out.print("ID del plan: ");
+    int planId = scanner.nextInt();
+    scanner.nextLine(); // Consumir el salto de línea pendiente
+
+    System.out.print("Calorías diarias: ");
+    int dailyCalories = scanner.nextInt();
+    scanner.nextLine(); // Consumir el salto de línea pendiente
+
+    System.out.print("Distribución de macronutrientes: ");
+    String macronutrientDistribution = scanner.nextLine();
+
+    System.out.print("Recomendaciones específicas: ");
+    String specificRecommendations = scanner.nextLine();
+
+    // Obtener la lista de comidas registradas
+    List<Meal> meals = Meal.getMealList();
+
+    // por si tengo que añadir lo que ya esta en meal System.out.println("Ingresa los detalles de las comidas:");
+
     
+    // Crear una instancia de DietPlan con los detalles proporcionados y asignar el plan al paciente
+    DietPlan dietPlan = new DietPlan(planId, dailyCalories, macronutrientDistribution, specificRecommendations, patient, dietitian, meals);
+    patient.setDietPlan(dietPlan);
 
-    Meal meal = new Meal(name, macronutrients, calories, timeOfDay);
-    List<Meal> mealList = new ArrayList<>(); // Create a new List<Meal> object
-    mealList.add(meal); // Add the new Meal object to the List
-    Meal.addMealToList(mealList, meal); // Pass the List<Meal> and Meal objects to the addMealToList method
-    System.out.println("Comida registrada exitosamente.");
-
+    System.out.println("Plan de alimentación generado exitosamente:");
+    System.out.println(dietPlan); // Muestra los detalles del plan de alimentación
 }
 
 // Method to register a meal

@@ -3,6 +3,8 @@ package Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import Services.PatientService;
+
 public class Patient {
     private int patientId;
     private String fullName;
@@ -13,6 +15,20 @@ public class Patient {
     private List<Meal> mealPlan; // this field to store the meal plan
     private DietPlan dietPlan; //this is so usefull to i can to asign a dietplan to patient (in class main with the method "generateMealPlan")
     
+    //Metodos
+
+    public static Patient getPatientById(int id) {
+        for (Patient patient : PatientService.getPatientList()) {
+            if (patient.getPatientId() == id) {
+                return patient; // Devuelve el paciente si se encuentra
+            }
+        }
+        return null; // Devuelve null si no se encuentra el paciente
+    }
+    // Metodo para obtener un DietPlan
+    public DietPlan getDietPlan() {
+        return dietPlan;
+    }
 
     public static void addPatient(int patientId, String fullName, int age, float weight, float height,
     String[] preexistingConditionsArray) {
@@ -37,6 +53,8 @@ public static void updatePatient(int patientId, String fullName, int age, float 
         this.preexistingConditions = preexistingConditions;
         this.mealPlan = new ArrayList<>(); // Initialize the meal plan list
     }
+
+      // getters y setters
     public void setFullName(String fullName) {
         this.fullName = capitalizeName(fullName);
     }
@@ -90,7 +108,7 @@ public static void updatePatient(int patientId, String fullName, int age, float 
     }
     
 
-    // getters y setters
+  
 
     @Override
     public String toString() {
