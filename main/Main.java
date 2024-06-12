@@ -4,7 +4,10 @@ import Models.Meal;
 import Models.Patient;
 import Models.DietPlan;
 import Helpers.CSVDietitian;
+import Helpers.CSVMeal;
+import Helpers.CSVDietPlan;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,10 +20,9 @@ public class Main {
     private static final String MEAL_PLAN_MENU_TITLE = "Meal Plan.";
     private static final String MEAL_REGISTRATION_MENU_TITLE = "Meal Registration.";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Load patient information from CSV file at the start of the program
-       
-        CSVPatient.loadInfo();
+
         CSVDietitian.loadInfo();
 
         // Main menu
@@ -57,225 +59,374 @@ public class Main {
         scanner.close();
     }
 
+    //Metodos para generar plan de alimentación, registro comida y manejar pacientes y dientistas
+ 
+    // 
     // Method to generate a meal plan
-private static void generateMealPlan(Scanner scanner) {
-    System.out.println("Ingresa el ID del paciente:");
-    int patientId = scanner.nextInt();
-    scanner.nextLine(); // Consumir el salto de línea pendiente
+private static void generateMealPlan(
+        System.out.println("Ingresa el ID del paciente:");
+        int patientId = scanner.nextInt();
+        scanner.nextLine(); // Consumir el
+        
 
-    Patient patient = Patient.getPatientById(patientId);
-    if (patient == null) {
-        System.out.println("No se encontró un paciente con el ID proporcionado.");
-        return;
-    }
+        if (patient == null) {
+            System.out.println
+            return;
+            
+        
 
-    Dietitian dietitian = null; // Aquí debes obtener el dietitian correspondiente al paciente
+        
 
-    // Solicitar al usuario los detalles del plan de alimentación
-    System.out.println("Ingresa los detalles del plan de alimentación:");
-    System.out.print("ID del plan: ");
-    int planId = scanner.nextInt();
-    scanner.nextLine(); // Consumir el salto de línea pendiente
+        System.out.println("Ingresa los detalles del plan de alimenta
+        System.out.print("ID del plan: ");
+        int planId = scanner.nextInt();
+        scanner.nextLine(); // Consumir
+        
 
-    System.out.print("Calorías diarias: ");
-    int dailyCalories = scanner.nextInt();
-    scanner.nextLine(); // Consumir el salto de línea pendiente
+        int dailyCalories = scanner.nextInt();
+        scanner.nextLine(); // Consumir el sal
+        
 
-    System.out.print("Distribución de macronutrientes: ");
-    String macronutrientDistribution = scanner.nextLine();
+        String macronutrientDistribution = scanner.nextLine();
+        
 
-    System.out.print("Recomendaciones específicas: ");
-    String specificRecommendations = scanner.nextLine();
+        String specificRecommendations = scanner.nextLine(
+        
 
-    // Obtener la lista de comidas registradas
-    List<Meal> meals = Meal.getMealList();
+        List<Meal> meals = Meal.getMealList(); // 
+        
 
-    // por si tengo que añadir lo que ya esta en meal System.out.println("Ingresa los detalles de las comidas:");
+        List<String[]> cheesesAndSubstitutesOptions = CSVDietPlan.read
+        List<String[]> floursCerealsAndDerivadosOptions = CSVDietPlan.readFloursCerealsAndDeri
+        List<String[]> fruitsOptions = CSVDietPlan.readFruits();
+        List<String[]> fatsOptions = CSVDietPlan.readFats();
+        List<String[]> vegetablesOptions = CSVDietPlan.readV
+        List<String[]> nutsAndSeedsOptions = CSVDietPlan.readNutsAndSeed
+        List<String[]> leguminosasOptions = CSVDietPlan.readLeguminosas();
+        List<String[]> leanMeatsOptions = CSVDietPlan.readLeanMeats();
+        
+
+        
+        // 
+
+         
+
+        System.out.println("¿Desea añ
+        String answer = scanner.nextLine();
+        if (answer.equalsIgnoreCase("si")) 
+            System.out.println("Ingrese los 
+            List<Meal> mealsList = new ArrayList<>();
+            
+
+            for (int i = 0; i < cheesesAndSubstitutesOptions.size
+                System.out.println((i + 1) + ". " + cheesesAndSubstitutesOp
+                
+            S
+            int mealIndex1 = scanner.nextInt() - 1;
+            String[] selectedOption1 = cheesesAndSu
+            Meal meal1 = new Meal(selectedOption1[0], selectedOption1[1], selectedOp
+            meals.add(meal1);
+            
+
+            
+
+            for (int i = 0; i < floursCerealsAndDerivadosOptions.siz
+                System.out.println((i + 1) + ". " + floursCerealsAndDerivadosOp
+                
+            S
+            int mealIndex2 = 
+                    scanner.nextInt() - 1;
+            String[] selectedOption2 = floursCereal
+            Meal meal2 = new Meal(selectedOption2[0], selectedOption2[1], selectedOption
+            meals.add(meal2); 
+            
+
+            for (int i = 0; i < fruitsOptions
+                System.out.println((i + 1) + ". " + fruitsOp
+                
+            S
+            int mealIndex3 = scanner.nextInt() - 1;
+            String[] selectedOption3 = fruitsOption
+            Meal meal3 = new Meal(selectedOption3[0], selectedOption3
+            meals.add(meal3);
+            
+
+            for (int i = 0; i < fatsOptions.s
+                System.out.println((i + 1) + ". " + fatsOp
+                
+            S
+            int mealIndex4 = scanner.nextInt() - 1;
+            String[] selectedOption4 = fatsOptions.
+            Meal meal4 = new Meal(selectedOption4[0], selectedOptio
+            meals.add(meal4);
+            
+
+            meals.add(breakfast);
+            
+        
+
+        System.out.println("¿Desea añ
+        answer = scanner.nextLine();
+        if (answer.equalsIgnoreCase(
+            System.out.println("Ingrese los 
+            System.out.print("Meatas: ");
+            String meats = scanner.nextLi
+            System.out.print("Legumes: ");
+            String legumes = scanner.nextL
+            System.out.print("Flour, cerals and 
+            String flour2 = scanner.nextLine();
+            System.out.print("Vegetables: ");
+            String vegetables = scanner.nextL
+            System.out.print("Fats: ");
+            String fats2 = scanner.next
+            
+
+            meals.add(lunch);
+            
+        
+
+        System.out.println("¿Dese
+        answer = scanner.nextLine();
+        if (answer.equalsIgnoreCase(
+            System.out.println("Ingrese los 
+            System.out.print("Cheese and substitutes: ");
+            String cheese2 = scanner.nextLine();
+            System.out.print("Flour, cerals and 
+            String flour3 = scanner.nextLine();
+            System.out.print("Fruits: ");
+            String fruits2 = scanner.next
+            System.out.print("Fats: ");
+            String fats3 = scanner.next
+            
+
+            meals.add(dinner);
+            
+        
+
+        System.out.println("¿Desea añadir una mini comida? (si/no)")
+        answer = scanner.nextLine();
+        if (answer.equalsIgnoreCase(
+            System.out.println("Ingrese los 
+            System.out.print("Cheese and substitutes: ");
+            String cheese3 = scanner.nextLine();
+            System.out.print("Flour, cerals and 
+            String flour4 = scanner.nextLine();
+            System.out.print("Time for eat (mor
+            String timeOfDay = scanner.nextLine();
+            
+
+            meals.add(snack);
+            
+        
+
+        System.out.println("¿Desea añadir una Merienda? (si/no)")
+        answer = scanner.nextLine();
+        if (answer.equalsIgnoreCase(
+            System.out.println("Ingrese los 
+            System.out.print("Fruits: ");
+            String fruits3 = scanner.next
+            System.out.print("Nuts an seeds: ");
+            String nuts = scanner.nextLine();
+            System.out.print("Time for eat (m
+            String timeOfDay2 = scanner.nextLine();
+            
+
+            meals.add(merienda);
+            
+        
+
+        System.out.println("¿Desea ver sus comidas? (si/no)");
+        // 
+        answer = scanner.nextLine();
+        if (answer.equalsIgnoreCase(
+            for (Meal meal : meals) {
+                System.out.println(me
+                
+            
+        
+
+        DietPlan dietPlan = new DietPlan(planId, dailyCalories, macronutrientDistributi
+        // n, specificRecom
+        patient.setDietPlan(dietPlan);
+                
+        
+
+        System.out.println(dietPlan); // Muestra los detalles del plan de 
+            
 
     
-    // Crear una instancia de DietPlan con los detalles proporcionados y asignar el plan al paciente
-    DietPlan dietPlan = new DietPlan(planId, dailyCalories, macronutrientDistribution, specificRecommendations, patient, dietitian, meals);
-    patient.setDietPlan(dietPlan);
 
-    System.out.println("Plan de alimentación generado exitosamente:");
-    System.out.println(dietPlan); // Muestra los detalles del plan de alimentación
-}
+    private static void register
+        // Implementación del método
+         // Código para registrar un
+        ystem.out.println("Ingresa los deta
+        System.out.print("Nombre: ");
+        String name = scanner.nextLin
+        System.out.print("Macronutrientes
+        String macronutrients = scanner.nextLi
+        System.out.print("Calorías: ");
+        int calories = scanner.nextInt(
+        scanner.nextLine(); // Consumir e
+        
 
-// Method to register a meal
-private static void registerMeal(Scanner scanner) {
-    // Implementación del método
-     // Código para registrar una comida
-    System.out.println("Ingresa los detalles de la comida:");
-    System.out.print("Nombre: ");
-    String name = scanner.nextLine();
-    System.out.print("Macronutrientes: ");
-    String macronutrients = scanner.nextLine();
-    System.out.print("Calorías: ");
-    int calories = scanner.nextInt();
-    scanner.nextLine(); // Consumir el salto de línea pendiente
+        Sy stem.out.print("Time of day (morning, afternoon, 
+        String timeOfDay = scanner.nextLine();
+        while (!timeOfDay.equals("morning") &&
+            System.out.println("Invalid input. Please enter 'morning', 'afternoon', or 'evening'.");
+            System.out.print("Time of day (morning, afternoon, evening): ");
+            timeOfDay = scanner.nextLine();
+            
+        
 
-    //The user should to write (yes or yes) the 3 words
-    System.out.print("Time of day (morning, afternoon, evening): ");
-    String timeOfDay = scanner.nextLine();
-    while (!timeOfDay.equals("morning") && !timeOfDay.equals("afternoon") && !timeOfDay.equals("evening")) {
-        System.out.println("Invalid input. Please enter 'morning', 'afternoon', or 'evening'.");
-        System.out.print("Time of day (morning, afternoon, evening): ");
-        timeOfDay = scanner.nextLine();
-    }
+        List<Meal> mealList = new ArrayList<>(); // Create a new List<Me
+        mealList.add(meal); // Add the new Meal object to the List
+        Meal.addMealToList(mealList, meal); // Pass the List<Meal>
+        System.out.println("Comida registrada exitosamente.");
+        
     
 
-    Meal meal = new Meal(name, macronutrients, calories, timeOfDay);
-    List<Meal> mealList = new ArrayList<>(); // Create a new List<Meal> object
-    mealList.add(meal); // Add the new Meal object to the List
-    Meal.addMealToList(mealList, meal); // Pass the List<Meal> and Meal objects to the addMealToList method
-    System.out.println("Comida registrada exitosamente.");
-
-}
-
-// Method to register a patient
-private static void registerPatient(Scanner scanner) {
-    // Implementación del método
-    System.out.println("Escribe el id del paciente.");
-                        int patientId = Integer.parseInt(scanner.nextLine());
-                        System.out.println("Escribe el nombre completo del paciente.");
-                        String fullName = scanner.nextLine();
-                        System.out.println("Escribe el año de nacimiento del paciente.");
-                        int age = Integer.parseInt(scanner.nextLine());
-                        System.out.println("Escribe el peso del paciente.");
-                        float weight = Float.parseFloat(scanner.nextLine());
-                        System.out.println("Escribe la altura del paciente.");
-                        float height = Float.parseFloat(scanner.nextLine());
-                        System.out.println("Escribe las condiciones preexistentes separándolas con ','");
-                        String preexistingConditions = scanner.nextLine();
-
-                        // Divide la entrada en partes individuales usando el delimitador ","
-                        String[] preexistingConditionsArray = preexistingConditions.split(",");
-
-                        // Elimina los espacios en blanco alrededor de cada condición
-                        for (int k = 0; k < preexistingConditionsArray.length; k++) {
-                            preexistingConditionsArray[k] = preexistingConditionsArray[k].trim();
-                        }
-
-                        Patient.addPatient(patientId, fullName, age, weight, height, preexistingConditionsArray);
-
-}
-
-// Method to update a patient
-private static void updatePatient(Scanner scanner) {
-    // Implementación del método
-    System.out.println("Escribe el id del paciente a actualizar.");
-    int patientId = Integer.parseInt(scanner.nextLine());
-    System.out.println("Escribe el nuevo nombre completo del paciente.");
-    String fullName = scanner.nextLine();
-    System.out.println("Escribe el año de nacimiento del paciente.");
-    int age = Integer.parseInt(scanner.nextLine());
-    System.out.println("Escribe el nuevo peso del paciente.");
-    float weight = Float.parseFloat(scanner.nextLine());
-    System.out.println("Escribe la nueva altura del paciente.");
-    float height = Float.parseFloat(scanner.nextLine());
-    System.out.println("Escribe las nuevas condiciones preexistentes separándolas con ','");
-    String preexistingConditions = scanner.nextLine();
-
-    // Divide la entrada en partes individuales usando el delimitador ","
-    String[] preexistingConditionsArray = preexistingConditions.split(",");
-
-    // Elimina los espacios en blanco alrededor de cada condición
-    for (int k = 0; k < preexistingConditionsArray.length; k++) {
-        preexistingConditionsArray[k] = preexistingConditionsArray[k].trim();
-    }
-
-    Patient.updatePatient(patientId, fullName, age, weight, height, preexistingConditionsArray);
-
-
-    
-}
-
-// Method to delete a patient
-private static void deletePatient(Scanner scanner) {
-    // Implementación del método
-    System.out.println("Escribe el id del paciente a eliminar.");
-    int patientId = Integer.parseInt(scanner.nextLine());
-    Patient.removePatient(patientId);
-}
-
-// Method to register a dietitian
-private static void registerDietitian(Scanner scanner) {
-   // método
-   System.out.println("Ingresa el id del nutricionista.");
-                        int dietitianId = Integer.parseInt(scanner.nextLine());
-                        System.out.println("Ingresa el nombre del nutricionista.");
-                        String FullName = scanner.nextLine();
-                        System.out.println("Ingresa las especialidades del nutricionista separadas por ','");
-                        String preexistingConditions = scanner.nextLine();
-
-                        // Divide la entrada en partes individuales usando el delimitador ","
-                        String[] preexistingConditionsArray = preexistingConditions.split(",");
-
-                        // Elimina los espacios en blanco alrededor de cada condición
-                        for (int k = 0; k < preexistingConditionsArray.length; k++) {
-                            preexistingConditionsArray[k] = preexistingConditionsArray[k].trim();
-                        }
-
-                        Dietitian.addDietitian(dietitianId, FullName, preexistingConditionsArray);
-                    
-}
-
-// Method to assign a dietitian to a patient
-private static void assignDietitianToPatient(Scanner scanner) {
-    // Implementación del método
-}
-
-    // Method to manage patients
-    private static void managePatients(Scanner scanner) {
-        int option;
+    private static void managePa
+       int option;
         do {
-            System.out.println(PATIENT_MENU_TITLE);
-            System.out.println("(1) Register a new patient.");
-            System.out.println("(2) Update patient information.");
+            
+            System.out.println("(1) Register a new 
+            System.out.println("(2) Update patient information
             System.out.println("(3) Delete patient information.");
             System.out.println("(0) Return to main menu.");
             option = Integer.parseInt(scanner.nextLine());
+            
 
-            // Switch statement to handle different patient management options
             switch (option) {
                 case 1:
-                    registerPatient(scanner);
+                    reg
                     break;
-                case 2:
-                    updatePatient(scanner);
+                     2:
+                    upd
                     break;
-                case 3:
-                    deletePatient(scanner);
+                     3:
+                    del
                     break;
-                default:
-                    System.out.println("Invalid option. Please try again.");
-            }
-        } while (option != 0);
-    }
+                    ult:
+                    Syst
+                    
+            i
+        
+    
 
-    // Method to manage dietitians
-    private static void manageDietitians(Scanner scanner) {
+    private static void manageDiet
         int option;
         do {
-            System.out.println(DIETITIAN_MENU_TITLE);
-            System.out.println("(1) Register a new dietitian.");
-            System.out.println("(2) Assign a dietitian to a patient.");
+            
+            System.out.println("(1) Register a new di
+            System.out.println("(2) Assign a dietitian to a pati
             System.out.println("(0) Return to main menu.");
             option = Integer.parseInt(scanner.nextLine());
+            
 
-            // Switch statement to handle different dietitian management options
             switch (option) {
                 case 1:
-                    registerDietitian(scanner);
+                    reg
                     break;
-                case 2:
-                    assignDietitianToPatient(scanner);
+                     2:
+                    ass
                     break;
-                default:
-                    System.out.println("Invalid option. Please try again.");
-            }
-        } while (option != 0);
-    }
+                    ult:
+                    Syst
+                    
+            i
+        
+    
+
+     
+
+    private static void registerPat
+        // Implementación del método
+        System.out.println("Escribe 
+                            int patientId = Integer.parseI
+        System.out.println("Escribe el nombre completo del pa
+        String fullName = scanner.nextLine();
+        System.out.println("Escribe el año de
+        int age = Integer.parseInt(scanner.nextLine());
+        System.out.println("Escribe el peso del pacient
+        float weight = Float.parseFloat(scanner.nextLine());
+        System.out.println("Escribe la altura del paciente."
+        float height = Float.parseFloat(scanner.nextLine());
+        System.out.println("Escribe las condiciones preexist
+        String preexistingConditions = scanner.nextLine();
+        
+
+        String[] preexistingConditionsArray = preexistingConditions.split(","
+        
+
+        for (int k = 0; k < preexistingConditionsArray.length; k++) {
+            preexistingConditionsArray[k] = preexistingConditionsArra
+            
+        
+
+        
 
     
-}
+
+    private static void updatePat
+        // Implementación del método
+        System.out.println("Escribe 
+        int patientId = Integer.parseInt(scanner.nextLine());
+        System.out.println("Escribe el nuevo nombre completo 
+        String fullName = scanner.nextLine();
+        System.out.println("Escribe el año de
+        int age = Integer.parseInt(scanner.nextLine());
+        System.out.println("Escribe el nuevo peso del p
+        float weight = Float.parseFloat(scanner.nextLine());
+        System.out.println("Escribe la nueva altura del paci
+        float height = Float.parseFloat(scanner.nextLine());
+        System.out.println("Escribe las nuevas condiciones p
+        String preexistingConditions = scanner.nextLine();
+        
+
+        String[] preexistingConditionsArray = preexistingConditions.split(","
+        
+
+        for (int k = 0; k < preexistingConditionsArray.length; k++) {
+            preexistingConditionsArray[k] = preexistingConditionsArra
+            
+        
+
+        
+
+    
+
+    private static void deletePat
+        // Implementación del método
+        System.out.println("Escribe 
+        int patientId = Integer.parseInt(scanner.nextLine());
+        Patient.removePatient(patientId);
+        
+    
+
+    private static void registerDieti
+       // método
+        System.ou
+                             int dietitianId = Integer.parseInt
+        System.out.println("Ingresa el nombre del nutricionista
+        String FullName = scanner.nextLine();
+        System.out.println("Ingresa las espec
+        String preexistingConditions = scanner.nextLine();
+        
+
+        String[] preexistingConditionsArray = preexistingConditions.split(","
+        
+
+        for (int k = 0; k < preexistingConditionsArray.length; k++) {
+            preexistingConditionsArray[k] = preexistingConditionsArra
+            
+        
+
+        
+
+    
+
+    private static void assignDietitianToPatient
+        // Implementación del método
+        
+    
+

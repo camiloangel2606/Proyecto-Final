@@ -11,7 +11,7 @@ public class DietPlan {
     private Patient patient;
     private Dietitian dietitian;
     private List<Meal> meals;
-
+    
     // Constructor vacío
     public DietPlan() {}
 
@@ -25,7 +25,6 @@ public class DietPlan {
         this.dietitian = dietitian;
         this.meals = meals;
     }
-
     // getters y setters
 
     public int getPlanId() {

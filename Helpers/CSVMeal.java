@@ -27,22 +27,36 @@ public class CSVMeal {
         }
     }
 
+    public static void saveInfo(List<Meal> meals) {
+        try {
+            writeToFile(CSV_FILE_PATH, meals);
+            System.out.println("Información de comidas guardada exitosamente.");
+        } catch (IOException e) {
+            System.out.println("Error al intentar guardar el archivo: " + e.getMessage());
+        }
+    }
+
     private static void readFromFile(String filePath, List<Meal> meals) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine())!= null) {
                 List<String> fields = Arrays.asList(line.split(","));
-                String mealName = fields.get(0);
                 String macronutrients = fields.get(1);
-                int calories = Integer.parseInt(fields.get(2));
                 String timeOfDay = fields.get(3);
-                Meal meal = new Meal(mealName, macronutrients, calories, timeOfDay);
+                int id = Integer.parseInt(fields.get(0));
+                String name = fields.get(1);
+                float calories = Float.parseFloat(fields.get(2));
+                float protein = Float.parseFloat(fields.get(3));
+                float carbohydrates = Float.parseFloat(fields.get(4));
+                float fat = Float.parseFloat(fields.get(5));
+                Meal meal = new Meal(id, name, calories, macronutrients, protein, carbohydrates, fat, timeOfDay);
                 meals.add(meal);
             }
         }
     }
+   
 
-    public static void writeInfo(List<Meal> meals) {
+    public static void writeInfo(List<Meal> meals) {//este método no es tan necesario
         try {
             writeToFile(CSV_FILE_PATH, meals);
             System.out.println("Información de comidas guardada exitosamente.");
@@ -54,7 +68,7 @@ public class CSVMeal {
     private static void writeToFile(String filePath, List<Meal> meals) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Meal meal : meals) {
-                String line = meal.getName() + "," + meal.getMacronutrients() + "," + meal.getCalories() + "," + meal.getTimeOfDay();
+                String line = meal.getId() + "," + meal.getName() + "," + meal.getCalories() + "," + meal.getMacronutrients() + "," + meal.getProtein() + "," + meal.getCarbohydrates() + "," + meal.getFat() + "," + meal.getTimeOfDay();
                 writer.write(line);
                 writer.newLine();
             }
