@@ -11,11 +11,26 @@ public class Meal {
     private String ingredient3;
     private String ingredient4;
     private String ingredient5;
+    private float protein;
+    private float carbohydrates;
+    private float fat;
     private String timeOfDay;
     private String macronutrients;
     private float calories;
 
     private static List<Meal> mealList = new ArrayList<>();
+
+    public Meal(int id, String name, float calories, String macronutrients, float protein, float carbohydrates,
+            float fat, String timeOfDay) {
+        this.id = id;
+        this.name = name;
+        this.calories = calories;
+        this.macronutrients = macronutrients;
+        this.protein = protein;
+        this.carbohydrates = carbohydrates;
+        this.fat = fat;
+        this.timeOfDay = timeOfDay;
+    }
 
     // Constructor con 7 parámetros
     public Meal(String name, String ingredient1, String ingredient2, String ingredient3, String ingredient4,
@@ -152,14 +167,6 @@ public class Meal {
         this.timeOfDay = timeOfDay;
     }
 
-    public String getMacronutrients() {
-        return macronutrients;
-    }
-
-    public void setMacronutrients(String macronutrients) {
-        this.macronutrients = macronutrients;
-    }
-
     public float getCalories() {
         return calories;
     }
@@ -168,8 +175,40 @@ public class Meal {
         this.calories = calories;
     }
 
+    public String getMacronutrients() {
+        return macronutrients;
+    }
+
+    public void setMacronutrients(String macronutrients) {
+        this.macronutrients = macronutrients;
+    }
+
+    public float getProtein() {
+        return protein;
+    }
+
+    public void setProtein(float protein) {
+        this.protein = protein;
+    }
+
+    public float getCarbohydrates() {
+        return carbohydrates;
+    }
+
+    public void setCarbohydrates(float carbohydrates) {
+        this.carbohydrates = carbohydrates;
+    }
+
+    public float getFat() {
+        return fat;
+    }
+
+    public void setFat(float fat) {
+        this.fat = fat;
+    }
+
     // Método estático para agregar una comida a la lista
-    public static void addMealToList(Meal meal) {
+    public static void addMealToList(List<Meal> meals, Meal meal) {
         mealList.add(meal);
     }
 

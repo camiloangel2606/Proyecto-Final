@@ -1,5 +1,6 @@
 package Models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Dietitian extends Patient {
@@ -14,7 +15,15 @@ public class Dietitian extends Patient {
         this.fullName = capitalizeName(fullName);
         this.preexistingConditions = preexistingConditions;
     }
-    
+
+    public Dietitian() {
+        // Constructor vacío
+        super(); // Llama al constructor sin argumentos de la clase madre (Patient)
+        this.dietitianId = 0; // O inicializa con un valor por defecto según sea necesario
+        this.fullName = "";
+        this.preexistingConditions = new ArrayList<>(); // Inicializa la lista de condiciones preexistentes
+    }
+
     public static void addDietitian(int dietitianId, String fullName, String[] preexistingConditionsArray) {
         // Implementación del método
     }
@@ -55,8 +64,8 @@ public class Dietitian extends Patient {
         for (String word : words) {
             if (word.length() > 0) {
                 capitalized.append(Character.toUpperCase(word.charAt(0)))
-                       .append(word.substring(1).toLowerCase())
-                       .append(" ");
+                        .append(word.substring(1).toLowerCase())
+                        .append(" ");
             }
         }
         return capitalized.toString().trim();

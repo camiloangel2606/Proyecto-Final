@@ -66,6 +66,24 @@ public class Main {
     private static void generateMealPlan(Scanner scanner) {
         List<Meal> meals = new ArrayList<>();
         int i = 1; // Asumimos que esto controla el bucle do-while
+        // Solicitar información adicional necesaria para crear DietPlan
+        System.out.print("Ingrese el ID del plan: ");
+        int planId = scanner.nextInt();
+        scanner.nextLine(); // consumir el salto de línea
+
+        System.out.print("Ingrese las calorías diarias: ");
+        float dailyCalories = scanner.nextFloat();
+        scanner.nextLine(); // consumir el salto de línea
+
+        System.out.print("Ingrese la distribución de macronutrientes: ");
+        String macronutrientDistribution = scanner.nextLine();
+
+        System.out.print("Ingrese recomendaciones específicas: ");
+        String specificRecommendations = scanner.nextLine();
+
+        // Aquí asumo que hay una forma de crear o obtener el paciente y el dietista
+        Patient patient = new Patient(); // Crea una instancia de Patient según tu lógica
+        Dietitian dietitian = new Dietitian(); // Crea una instancia de Dietitian según tu lógica
 
         try {
             // Obtener las opciones disponibles de cada grupo de alimentos
@@ -88,19 +106,21 @@ public class Main {
                     for (int j = 0; j < cheesesAndSubstitutesOptions.size(); j++) {
                         System.out.println((j + 1) + ". " + cheesesAndSubstitutesOptions.get(j)[0]);
                     }
-                    System.out.print("Selecciona un queso y derivado lácteo (1-" + cheesesAndSubstitutesOptions.size() + "): ");
+                    System.out.print(
+                            "Selecciona un queso y derivado lácteo (1-" + cheesesAndSubstitutesOptions.size() + "): ");
                     int mealIndex1 = scanner.nextInt() - 1;
                     String[] selectedOption1 = cheesesAndSubstitutesOptions.get(mealIndex1);
-                    scanner.nextLine();  // consume newline
+                    scanner.nextLine(); // consume newline
 
                     System.out.println("2. Harinas, Cereales y Derivados:");
                     for (int j = 0; j < floursCerealsAndDerivadosOptions.size(); j++) {
                         System.out.println((j + 1) + ". " + floursCerealsAndDerivadosOptions.get(j)[0]);
                     }
-                    System.out.print("Selecciona una harina, cereal o derivado (1-" + floursCerealsAndDerivadosOptions.size() + "): ");
+                    System.out.print("Selecciona una harina, cereal o derivado (1-"
+                            + floursCerealsAndDerivadosOptions.size() + "): ");
                     int mealIndex2 = scanner.nextInt() - 1;
                     String[] selectedOption2 = floursCerealsAndDerivadosOptions.get(mealIndex2);
-                    scanner.nextLine();  // consume newline
+                    scanner.nextLine(); // consume newline
 
                     System.out.println("3. Frutas:");
                     for (int j = 0; j < fruitsOptions.size(); j++) {
@@ -109,7 +129,7 @@ public class Main {
                     System.out.print("Selecciona una fruta (1-" + fruitsOptions.size() + "): ");
                     int mealIndex3 = scanner.nextInt() - 1;
                     String[] selectedOption3 = fruitsOptions.get(mealIndex3);
-                    scanner.nextLine();  // consume newline
+                    scanner.nextLine(); // consume newline
 
                     System.out.println("4. Grasas:");
                     for (int j = 0; j < fatsOptions.size(); j++) {
@@ -118,9 +138,10 @@ public class Main {
                     System.out.print("Selecciona una grasa (1-" + fatsOptions.size() + "): ");
                     int mealIndex4 = scanner.nextInt() - 1;
                     String[] selectedOption4 = fatsOptions.get(mealIndex4);
-                    scanner.nextLine();  // consume newline
+                    scanner.nextLine(); // consume newline
 
-                    Meal breakfast = new Meal("Desayuno", selectedOption1[0], selectedOption2[0], selectedOption3[0], selectedOption4[0], "Morning");
+                    Meal breakfast = new Meal("Desayuno", selectedOption1[0], selectedOption2[0], selectedOption3[0],
+                            selectedOption4[0], "Morning");
                     meals.add(breakfast);
                 }
 
@@ -199,16 +220,10 @@ public class Main {
                     }
                 }
 
-                // Definir variables necesarias para crear el DietPlan
-                int planId = 1; // Ejemplo de planId, cámbialo según sea necesario
-                float dailyCalories = 2000; // Ejemplo de calorías diarias, cámbialo según sea necesario
-                String macronutrientDistribution = "40% carbs, 30% protein, 30% fat"; // Ejemplo de distribución de macronutrientes
-                String specificRecommendations = "Beber 2 litros de agua al día"; // Ejemplo de recomendaciones específicas
-                Patient patient = new Patient("John Doe", 30, "M"); // Ejemplo de paciente, asegúrate de tener la clase Patient
-                Dietitian dietitian = new Dietitian("Jane Smith", "12345"); // Ejemplo de dietista, asegúrate de tener la clase Dietitian
-
-                // Crear una instancia de DietPlan con los detalles proporcionados y asignar el plan al paciente
-                DietPlan dietPlan = new DietPlan(planId, dailyCalories, macronutrientDistribution, specificRecommendations, patient, dietitian, meals);
+                // Crear una instancia de DietPlan con los detalles proporcionados y asignar el
+                // plan al paciente
+                DietPlan dietPlan = new DietPlan(planId, dailyCalories, macronutrientDistribution,
+                        specificRecommendations, patient, dietitian, meals);
                 patient.setDietPlan(dietPlan);
 
                 System.out.println("Plan de alimentación generado exitosamente:");
@@ -225,6 +240,7 @@ public class Main {
             // Puedes cerrar el scanner si es necesario
             scanner.close();
         }
+    }
 
     private static void registerMeal(Scanner scanner) {
         System.out.println("Ingresa los detalles de la comida:");
@@ -248,7 +264,7 @@ public class Main {
 
         // Crea un nuevo objeto Meal con los parámetros proporcionados
         Meal meal = new Meal(id, name, macronutrients, calories, timeOfDay);
-        Meal.addMealToList(meal); // Añadir la comida a la lista
+        Meal.addMealToList(null, meal); // Añadir la comida a la lista
         System.out.println("Comida registrada exitosamente: " + meal);
     }
 
