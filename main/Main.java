@@ -50,7 +50,9 @@ public class Main {
                 case 4:
                     registerMeal(scanner);
                     break;
-
+                case 0:
+                    System.out.println("Gracias por usar nuestro programa.");
+                    break;
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
