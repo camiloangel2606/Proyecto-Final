@@ -64,7 +64,6 @@ public class Main {
     // Metodos para generar plan de alimentación, registro comida y manejar
     // pacientes y dientistas
 
-    // Method to generate a meal plan
     private static void generateMealPlan(Scanner scanner) {
         List<Meal> meals = new ArrayList<>();
         int i = 1; // Controla el bucle do-while
@@ -94,13 +93,13 @@ public class Main {
                 if (answer.equalsIgnoreCase("si")) {
                     System.out.println("Ingrese los detalles del desayuno:");
                     System.out.println("1. Quesos y Derivados Lácteos:");
-                    String cheeseOption = scanner.nextLine();
+                    String cheeseOption = readOption(scanner, "Quesos y Derivados Lácteos");
                     System.out.println("2. Harinas, Cereales y Derivados:");
-                    String flourOption = scanner.nextLine();
+                    String flourOption = readOption(scanner, "Harinas, Cereales y Derivados");
                     System.out.println("3. Frutas:");
-                    String fruitOption = scanner.nextLine();
+                    String fruitOption = readOption(scanner, "Frutas");
                     System.out.println("4. Grasas:");
-                    String fatOption = scanner.nextLine();
+                    String fatOption = readOption(scanner, "Grasas");
                     Meal breakfast = new Meal("Desayuno", cheeseOption, flourOption, fruitOption, fatOption, "Morning");
                     meals.add(breakfast);
                 }
@@ -138,6 +137,12 @@ public class Main {
         }
     }
 
+    // Método auxiliar para leer la opción del usuario y mostrar el grupo de comida
+    private static String readOption(Scanner scanner, String foodGroup) {
+        System.out.println("Ingrese su elección para " + foodGroup + ":");
+        return scanner.nextLine();
+    }
+
     private static void registerMeal(Scanner scanner) {
 
         System.out.println("Ingresa los detalles de la comida:");
@@ -146,7 +151,8 @@ public class Main {
         System.out.print("Nombre: ");
         String name = scanner.nextLine();
         System.out.print("Porción: ");
-        float portion = Float.parseFloat(scanner.nextLine());
+        float portion = scanner.nextFloat();
+        scanner.nextLine();
 
         System.out.println("¿En qué grupo de alimentos desea agregar la nueva comida?");
         System.out.println("1. Quesos y derivados lácteos");
