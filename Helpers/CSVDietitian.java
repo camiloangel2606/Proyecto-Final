@@ -1,4 +1,5 @@
-package Helpers; 
+package Helpers;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -12,7 +13,7 @@ import Models.Dietitian;
 import Services.DietitianService;
 
 public class CSVDietitian {
-    private static final String CSV_FILE_PATH = "Dietitian.csv";
+    private static final String CSV_FILE_PATH = "Data/Dietitian.csv";
 
     public static void loadInfo() {
         List<Dietitian> dietitians = new ArrayList<>();

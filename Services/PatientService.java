@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import Models.Patient;
-import Models.Meal;
-import Models.DietPlan;
 import Helpers.CSVPatient;
+import Models.DietPlan;
+import Models.Meal;
+import Models.Patient;
 
 public class PatientService {
     private static List<Patient> patientList = new ArrayList<>();
@@ -31,6 +31,10 @@ public class PatientService {
 
     public static void addPatientToList(Patient patient) {
         patientList.add(patient);
+    }
+
+    public static void addPatientList(List<Patient> patients) {
+        patientList.addAll(patients);
     }
 
     public static void removePatient(int PatientId) {
