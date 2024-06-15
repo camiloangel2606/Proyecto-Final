@@ -10,6 +10,7 @@ import Models.DietPlan;
 import Models.Dietitian;
 import Models.Meal;
 import Models.Patient;
+import Services.PatientService;
 
 public class Main {
     // Constants for menu titles
@@ -348,7 +349,7 @@ public class Main {
             preexistingConditionsArray[k] = preexistingConditionsArray[k].trim();
         }
 
-        Patient.addPatient(patientId, fullName, age, weight, height, preexistingConditionsArray);
+        PatientService.addPatient(patientId, fullName, age, weight, height, preexistingConditionsArray);
 
     }
 
@@ -376,7 +377,7 @@ public class Main {
             preexistingConditionsArray[k] = preexistingConditionsArray[k].trim();
         }
 
-        Patient.updatePatient(patientId, fullName, age, weight, height, preexistingConditionsArray);
+        PatientService.updatePatient(patientId, fullName, age, weight, height, preexistingConditionsArray);
 
     }
 
@@ -385,7 +386,7 @@ public class Main {
         // Implementación del método
         System.out.println("Escribe el id del paciente a eliminar.");
         int patientId = Integer.parseInt(scanner.nextLine());
-        Patient.removePatient(patientId);
+        PatientService.removePatient(patientId);
     }
 
     // Method to register a dietitian

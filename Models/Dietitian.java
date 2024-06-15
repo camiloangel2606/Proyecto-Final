@@ -1,5 +1,8 @@
 package Models;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,17 +28,22 @@ public class Dietitian extends Patient {
     }
 
     public static void addDietitian(int dietitianId, String fullName, String[] preexistingConditionsArray) {
-        // Implementación del método
-    }
+        String filePath = "Data/Dietitian.csv";
+        String preexistingConditions = String.join(";", preexistingConditionsArray); // Use ";" as delimiter for
+                                                                                     // conditions
+        String[] dietitianData = { String.valueOf(dietitianId), fullName, preexistingConditions };
+        String line = String.join(",", dietitianData);
 
-    @Override
-    public void setFullName(String fullName) {
-        this.fullName = capitalizeName(fullName);
-    }
-
-    @Override
-    public String getFullName() {
-        return this.fullName;
+        // Write data to file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.newLine();
+            writer.write(line);
+            writer.newLine(); // Ensure a new line after each entry
+            System.out.println("Nutricionista registrado correctamente.");
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void setDietitianId(int dietitianId) {

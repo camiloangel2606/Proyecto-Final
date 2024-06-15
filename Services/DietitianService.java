@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import Models.Dietitian;
 import Helpers.CSVDietitian;
+import Models.Dietitian;
 
 public class DietitianService {
     private List<Dietitian> dietitianList = new ArrayList<>();
@@ -14,13 +14,13 @@ public class DietitianService {
         loadInfo();
     }
 
-    //ELIMINAR
-  // Agregar el método addDietitianList
-  public void addDietitianList(List<Dietitian> dietitians) {
-    dietitianList.addAll(dietitians);
-    CSVDietitian.saveInfo(dietitianList);
-}
-    //ELIMINAR
+    // ELIMINAR
+    // Agregar el método addDietitianList
+    public void addDietitianList(List<Dietitian> dietitians) {
+        dietitianList.addAll(dietitians);
+        CSVDietitian.saveInfo(dietitianList);
+    }
+    // ELIMINAR
 
     public void addDietitian(int dietitianId, String fullName, String[] preexistingConditions) {
         List<String> preexistingConditionsList = Arrays.asList(preexistingConditions);
