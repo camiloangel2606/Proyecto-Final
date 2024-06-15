@@ -35,7 +35,7 @@ UNIVERSIDAD DE CALDAS
 
 
 
-
+NOTA: EL PROGRAMA FUNCIONAL SE ENCUENTRA EN LA RAMA "Main", NO SE ENCUENTRA EN LA RAMA POR DEFECTO. 
 Carpeta Main
 Sistema de gestión para servicios de nutrición, con funcionalidades como registro y gestión de pacientes, dietistas, planes de dieta y comidas. Utiliza archivos CSV para almacenar y cargar datos persistentes. Aquí tienes un resumen corto del funcionamiento:
 
