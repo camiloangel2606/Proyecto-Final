@@ -1,5 +1,8 @@
 package Models;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,11 @@ public class Meal {
     private String timeOfDay;
     private String macronutrients;
     private float calories;
+    private String type;
+    private String option1;
+    private String option2;
+    private String option3;
+    private String option4;
 
     private static List<Meal> mealList = new ArrayList<>();
 
@@ -100,6 +108,48 @@ public class Meal {
         this.ingredient1 = ingredient1;
         this.calories = calories;
         this.timeOfDay = timeOfDay;
+    }
+
+    // Método estático para guardar las comidas en un archivo CSV
+    public static void saveMealsToCSV(List<Meal> meals) {
+        String csvFileName = "meal_plan.csv";
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(csvFileName))) {
+            // Escribir la cabecera del CSV
+            writer.println("Meal Name,Ingredient 1,Ingredient 2,Ingredient 3,Time of Day");
+
+            // Escribir cada comida en una línea del CSV
+            for (Meal meal : meals) {
+                writer.print(meal.getName());
+                writer.print(",");
+                writer.print(meal.getIngredient1());
+                writer.print(",");
+                writer.print(meal.getIngredient2());
+                writer.print(",");
+                writer.print(meal.getIngredient3());
+                writer.print(",");
+                writer.println(meal.getTimeOfDay());
+            }
+
+            System.out.println("Información de comidas guardada en '" + csvFileName + "'");
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo CSV: " + e.getMessage());
+        }
+    }
+
+    public static void addMealToCSV(String fileName, int id, String name, float portion) {
+        String[] mealData = { String.valueOf(id), name, String.valueOf(portion) };
+
+        try (FileWriter writer = new FileWriter(fileName, true)) {
+            for (String data : mealData) {
+                writer.append(data).append(",");
+            }
+            writer.append("\n");
+            System.out.println("Comida agregada exitosamente al archivo " + fileName);
+        } catch (IOException e) {
+            System.out.println("Ocurrió un error al escribir en el archivo CSV: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     // Getters y Setters

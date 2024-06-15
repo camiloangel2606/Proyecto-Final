@@ -1,5 +1,6 @@
 package Models;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,7 +102,8 @@ public class Patient {
     }
 
     public int getAge() {
-        return birthYear; // or calculate the age based on the birth year
+        int currentYear = Year.now().getValue();
+        return currentYear - birthYear;
     }
 
     public float getWeight() {

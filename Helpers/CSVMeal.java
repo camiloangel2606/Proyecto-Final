@@ -12,7 +12,7 @@ import java.util.List;
 import Models.Meal;
 
 public class CSVMeal {
-    private static final String CSV_FILE_PATH = "Meals.csv";
+    private static final String CSV_FILE_PATH = "Data/Meals.csv";
 
     public static void loadInfo() {
         List<Meal> meals = new ArrayList<>();
@@ -39,7 +39,7 @@ public class CSVMeal {
     private static void readFromFile(String filePath, List<Meal> meals) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            while ((line = reader.readLine())!= null) {
+            while ((line = reader.readLine()) != null) {
                 List<String> fields = Arrays.asList(line.split(","));
                 String macronutrients = fields.get(1);
                 String timeOfDay = fields.get(3);
@@ -54,9 +54,8 @@ public class CSVMeal {
             }
         }
     }
-   
 
-    public static void writeInfo(List<Meal> meals) {//este método no es tan necesario
+    public static void writeInfo(List<Meal> meals) {// este método no es tan necesario
         try {
             writeToFile(CSV_FILE_PATH, meals);
             System.out.println("Información de comidas guardada exitosamente.");
@@ -68,7 +67,9 @@ public class CSVMeal {
     private static void writeToFile(String filePath, List<Meal> meals) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Meal meal : meals) {
-                String line = meal.getId() + "," + meal.getName() + "," + meal.getCalories() + "," + meal.getMacronutrients() + "," + meal.getProtein() + "," + meal.getCarbohydrates() + "," + meal.getFat() + "," + meal.getTimeOfDay();
+                String line = meal.getId() + "," + meal.getName() + "," + meal.getCalories() + ","
+                        + meal.getMacronutrients() + "," + meal.getProtein() + "," + meal.getCarbohydrates() + ","
+                        + meal.getFat() + "," + meal.getTimeOfDay();
                 writer.write(line);
                 writer.newLine();
             }

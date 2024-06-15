@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import Helpers.CSVDietPlan;
 import Helpers.CSVDietitian;
 import Helpers.CSVPatient;
 import Models.DietPlan;
@@ -68,15 +67,16 @@ public class Main {
     // Method to generate a meal plan
     private static void generateMealPlan(Scanner scanner) {
         List<Meal> meals = new ArrayList<>();
-        int i = 1; // Asumimos que esto controla el bucle do-while
+        int i = 1; // Controla el bucle do-while
+
         // Solicitar información adicional necesaria para crear DietPlan
         System.out.print("Ingrese el ID del plan: ");
         int planId = scanner.nextInt();
-        scanner.nextLine(); // consumir el salto de línea
+        scanner.nextLine(); // Consumir el salto de línea
 
         System.out.print("Ingrese las calorías diarias: ");
         float dailyCalories = scanner.nextFloat();
-        scanner.nextLine(); // consumir el salto de línea
+        scanner.nextLine(); // Consumir el salto de línea
 
         System.out.print("Ingrese la distribución de macronutrientes: ");
         String macronutrientDistribution = scanner.nextLine();
@@ -84,21 +84,10 @@ public class Main {
         System.out.print("Ingrese recomendaciones específicas: ");
         String specificRecommendations = scanner.nextLine();
 
-        // Aquí asumo que hay una forma de crear o obtener el paciente y el dietista
-        Patient patient = new Patient(); // Crea una instancia de Patient según tu lógica
-        Dietitian dietitian = new Dietitian(); // Crea una instancia de Dietitian según tu lógica
+        Patient patient = new Patient();
+        Dietitian dietitian = new Dietitian();
 
         try {
-            // Obtener las opciones disponibles de cada grupo de alimentos
-            List<String[]> cheesesAndSubstitutesOptions = CSVDietPlan.readCheesesAndSubstitutes();
-            List<String[]> floursCerealsAndDerivadosOptions = CSVDietPlan.readFloursCerealsAndDerivados();
-            List<String[]> fruitsOptions = CSVDietPlan.readFruits();
-            List<String[]> fatsOptions = CSVDietPlan.readFats();
-            List<String[]> vegetablesOptions = CSVDietPlan.readVegetables();
-            List<String[]> nutsAndSeedsOptions = CSVDietPlan.readNutsAndSeeds();
-            List<String[]> leguminosasOptions = CSVDietPlan.readLeguminosas();
-            List<String[]> leanMeatsOptions = CSVDietPlan.readLeanMeats();
-
             do {
                 System.out.println("¿Desea añadir desayuno? (si/no)");
                 String answer = scanner.nextLine();
@@ -106,45 +95,26 @@ public class Main {
                     System.out.println("Ingrese los detalles del desayuno:");
 
                     System.out.println("1. Quesos y Derivados Lácteos:");
-                    for (int j = 0; j < cheesesAndSubstitutesOptions.size(); j++) {
-                        System.out.println((j + 1) + ". " + cheesesAndSubstitutesOptions.get(j)[0]);
-                    }
-                    System.out.print(
-                            "Selecciona un queso y derivado lácteo (1-" + cheesesAndSubstitutesOptions.size() + "): ");
-                    int mealIndex1 = scanner.nextInt() - 1;
-                    String[] selectedOption1 = cheesesAndSubstitutesOptions.get(mealIndex1);
-                    scanner.nextLine(); // consume newline
+                    // Aquí iría la lógica para mostrar opciones de quesos y derivados lácteos
+                    System.out.println("Selecciona un queso y derivado lácteo: ");
+                    String cheeseOption = scanner.nextLine();
 
                     System.out.println("2. Harinas, Cereales y Derivados:");
-                    for (int j = 0; j < floursCerealsAndDerivadosOptions.size(); j++) {
-                        System.out.println((j + 1) + ". " + floursCerealsAndDerivadosOptions.get(j)[0]);
-                    }
-                    System.out.print("Selecciona una harina, cereal o derivado (1-"
-                            + floursCerealsAndDerivadosOptions.size() + "): ");
-                    int mealIndex2 = scanner.nextInt() - 1;
-                    String[] selectedOption2 = floursCerealsAndDerivadosOptions.get(mealIndex2);
-                    scanner.nextLine(); // consume newline
+                    // Aquí iría la lógica para mostrar opciones de harinas, cereales y derivados
+                    System.out.println("Selecciona una harina, cereal o derivado: ");
+                    String flourOption = scanner.nextLine();
 
                     System.out.println("3. Frutas:");
-                    for (int j = 0; j < fruitsOptions.size(); j++) {
-                        System.out.println((j + 1) + ". " + fruitsOptions.get(j)[0]);
-                    }
-                    System.out.print("Selecciona una fruta (1-" + fruitsOptions.size() + "): ");
-                    int mealIndex3 = scanner.nextInt() - 1;
-                    String[] selectedOption3 = fruitsOptions.get(mealIndex3);
-                    scanner.nextLine(); // consume newline
+                    // Aquí iría la lógica para mostrar opciones de frutas
+                    System.out.println("Selecciona una fruta: ");
+                    String fruitOption = scanner.nextLine();
 
                     System.out.println("4. Grasas:");
-                    for (int j = 0; j < fatsOptions.size(); j++) {
-                        System.out.println((j + 1) + ". " + fatsOptions.get(j)[0]);
-                    }
-                    System.out.print("Selecciona una grasa (1-" + fatsOptions.size() + "): ");
-                    int mealIndex4 = scanner.nextInt() - 1;
-                    String[] selectedOption4 = fatsOptions.get(mealIndex4);
-                    scanner.nextLine(); // consume newline
+                    // Aquí iría la lógica para mostrar opciones de grasas
+                    System.out.println("Selecciona una grasa: ");
+                    String fatOption = scanner.nextLine();
 
-                    Meal breakfast = new Meal("Desayuno", selectedOption1[0], selectedOption2[0], selectedOption3[0],
-                            selectedOption4[0], "Morning");
+                    Meal breakfast = new Meal("Desayuno", cheeseOption, flourOption, fruitOption, fatOption, "Morning");
                     meals.add(breakfast);
                 }
 
@@ -152,18 +122,19 @@ public class Main {
                 answer = scanner.nextLine();
                 if (answer.equalsIgnoreCase("si")) {
                     System.out.println("Ingrese los detalles del almuerzo:");
+                    // Aquí iría la lógica para preguntar detalles específicos del almuerzo
                     System.out.print("Meats: ");
                     String meats = scanner.nextLine();
                     System.out.print("Legumes: ");
                     String legumes = scanner.nextLine();
                     System.out.print("Flour, cereals and derivados: ");
-                    String flour2 = scanner.nextLine();
+                    String flour = scanner.nextLine();
                     System.out.print("Vegetables: ");
                     String vegetables = scanner.nextLine();
                     System.out.print("Fats: ");
-                    String fats2 = scanner.nextLine();
+                    String fats = scanner.nextLine();
 
-                    Meal lunch = new Meal("Almuerzo", meats, legumes, flour2, vegetables, fats2, "Afternoon");
+                    Meal lunch = new Meal("Almuerzo", meats, legumes, flour, vegetables, fats, "Afternoon");
                     meals.add(lunch);
                 }
 
@@ -171,16 +142,17 @@ public class Main {
                 answer = scanner.nextLine();
                 if (answer.equalsIgnoreCase("si")) {
                     System.out.println("Ingrese los detalles de la cena:");
+                    // Aquí iría la lógica para preguntar detalles específicos de la cena
                     System.out.print("Cheese and substitutes: ");
-                    String cheese2 = scanner.nextLine();
+                    String cheese = scanner.nextLine();
                     System.out.print("Flour, cereals and derivados: ");
-                    String flour3 = scanner.nextLine();
+                    String flour = scanner.nextLine();
                     System.out.print("Fruits: ");
-                    String fruits2 = scanner.nextLine();
+                    String fruits = scanner.nextLine();
                     System.out.print("Fats: ");
-                    String fats3 = scanner.nextLine();
+                    String fats = scanner.nextLine();
 
-                    Meal dinner = new Meal("Cena", cheese2, flour3, fruits2, fats3, "Evening");
+                    Meal dinner = new Meal("Cena", cheese, flour, fruits, fats, "Evening");
                     meals.add(dinner);
                 }
 
@@ -188,14 +160,15 @@ public class Main {
                 answer = scanner.nextLine();
                 if (answer.equalsIgnoreCase("si")) {
                     System.out.println("Ingrese los detalles de la mini comida:");
+                    // Aquí iría la lógica para preguntar detalles específicos de la mini comida
                     System.out.print("Cheese and substitutes: ");
-                    String cheese3 = scanner.nextLine();
+                    String cheese = scanner.nextLine();
                     System.out.print("Flour, cereals and derivados: ");
-                    String flour4 = scanner.nextLine();
+                    String flour = scanner.nextLine();
                     System.out.print("Time for eat (morning, afternoon, night): ");
                     String timeOfDay = scanner.nextLine();
 
-                    Meal snack = new Meal("Mini comida", cheese3, flour4, timeOfDay);
+                    Meal snack = new Meal("Mini comida", cheese, flour, timeOfDay);
                     meals.add(snack);
                 }
 
@@ -203,16 +176,16 @@ public class Main {
                 answer = scanner.nextLine();
                 if (answer.equalsIgnoreCase("si")) {
                     System.out.println("Ingrese los detalles de la Merienda:");
+                    // Aquí iría la lógica para preguntar detalles específicos de la merienda
                     System.out.print("Fruits: ");
-                    String fruits3 = scanner.nextLine();
+                    String fruits = scanner.nextLine();
                     System.out.print("Nuts and seeds: ");
                     String nuts = scanner.nextLine();
                     System.out.print("Time for eat (morning, afternoon, night): ");
-                    String timeOfDay2 = scanner.nextLine();
+                    String timeOfDay = scanner.nextLine();
 
-                    float calories = 150; // Esto es un ejemplo, ajusta según sea necesario
-                    Meal merienda = new Meal("Merienda", fruits3 + ", " + nuts, calories, timeOfDay2);
-                    meals.add(merienda);
+                    Meal snack = new Meal("Merienda", fruits + ", " + nuts, timeOfDay);
+                    meals.add(snack);
                 }
 
                 System.out.println("¿Desea ver sus comidas? (si/no)");
@@ -231,12 +204,13 @@ public class Main {
 
                 System.out.println("Plan de alimentación generado exitosamente:");
                 System.out.println(dietPlan); // Muestra los detalles del plan de alimentación
-                i = 0; // Asumimos que el bucle debe terminar después de un ciclo completo
+
+                // Guardar las comidas en un archivo CSV
+                Meal.saveMealsToCSV(meals);
+
+                i = 0; // Finalizar el bucle después de un ciclo completo
             } while (i != 0);
 
-        } catch (IOException e) {
-            System.out.println("Ocurrió un error al leer los archivos CSV: " + e.getMessage());
-            e.printStackTrace();
         } finally {
             // Cierre de recursos o cualquier limpieza necesaria
             System.out.println("Cierre de recursos o cualquier limpieza necesaria.");
@@ -246,29 +220,70 @@ public class Main {
     }
 
     private static void registerMeal(Scanner scanner) {
+        System.out.print("Ingrese el ID del paciente: ");
+        int patientId = Integer.parseInt(scanner.nextLine());
+
+        Patient patient = Patient.getPatientById(patientId);
+        if (patient == null) {
+            System.out.println("Paciente no encontrado.");
+            return;
+        }
         System.out.println("Ingresa los detalles de la comida:");
         System.out.print("ID: ");
         int id = Integer.parseInt(scanner.nextLine());
         System.out.print("Nombre: ");
         String name = scanner.nextLine();
-        System.out.print("Macronutrientes: ");
-        String macronutrients = scanner.nextLine();
-        System.out.print("Calorías: ");
-        float calories = Float.parseFloat(scanner.nextLine());
-        System.out.print("Time of day (morning, afternoon, evening): ");
-        String timeOfDay = scanner.nextLine();
+        System.out.print("Porción: ");
+        float portion = Float.parseFloat(scanner.nextLine());
 
-        while (!timeOfDay.equalsIgnoreCase("morning") && !timeOfDay.equalsIgnoreCase("afternoon")
-                && !timeOfDay.equalsIgnoreCase("evening")) {
-            System.out.println("Entrada no válida. Por favor, ingresa 'morning', 'afternoon' o 'evening'.");
-            System.out.print("Time of day (morning, afternoon, evening): ");
-            timeOfDay = scanner.nextLine();
+        System.out.println("¿En qué grupo de alimentos desea agregar la nueva comida?");
+        System.out.println("1. Quesos y derivados lácteos");
+        System.out.println("2. Grasas");
+        System.out.println("3. Harinas, cereales y derivados");
+        System.out.println("4. Frutas");
+        System.out.println("5. Carnes magras");
+        System.out.println("6. Leguminosas");
+        System.out.println("7. Plan de comidas");
+        System.out.println("8. Leches");
+        System.out.println("9. Nueces y semillas");
+        System.out.println("10. Verduras");
+        System.out.print("Ingrese el número correspondiente al grupo: ");
+        int choice = Integer.parseInt(scanner.nextLine());
+
+        switch (choice) {
+            case 1:
+                Meal.addMealToCSV("cheeses_and_substitutes.csv", id, name, portion);
+                break;
+            case 2:
+                Meal.addMealToCSV("fats.csv", id, name, portion);
+                break;
+            case 3:
+                Meal.addMealToCSV("flours_cereals_and_derivados.csv", id, name, portion);
+                break;
+            case 4:
+                Meal.addMealToCSV("fruits.csv", id, name, portion);
+                break;
+            case 5:
+                Meal.addMealToCSV("lean_meats.csv", id, name, portion);
+                break;
+            case 6:
+                Meal.addMealToCSV("leguminosas.csv", id, name, portion);
+                break;
+            case 7:
+                Meal.addMealToCSV("meal_plan.csv", id, name, portion);
+                break;
+            case 8:
+                Meal.addMealToCSV("milks.csv", id, name, portion);
+                break;
+            case 9:
+                Meal.addMealToCSV("nuts_and_seeds.csv", id, name, portion);
+                break;
+            case 10:
+                Meal.addMealToCSV("vegetables.csv", id, name, portion);
+                break;
+            default:
+                System.out.println("Opción no válida. No se ha agregado la comida a ningún archivo.");
         }
-
-        // Crea un nuevo objeto Meal con los parámetros proporcionados
-        Meal meal = new Meal(id, name, macronutrients, calories, timeOfDay);
-        Meal.addMealToList(null, meal); // Añadir la comida a la lista
-        System.out.println("Comida registrada exitosamente: " + meal);
     }
 
     // Method to manage patients
