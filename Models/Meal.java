@@ -20,11 +20,6 @@ public class Meal {
     private String timeOfDay;
     private String macronutrients;
     private float calories;
-    private String type;
-    private String option1;
-    private String option2;
-    private String option3;
-    private String option4;
 
     private static List<Meal> mealList = new ArrayList<>();
 
