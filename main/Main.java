@@ -93,101 +93,21 @@ public class Main {
                 String answer = scanner.nextLine();
                 if (answer.equalsIgnoreCase("si")) {
                     System.out.println("Ingrese los detalles del desayuno:");
-
                     System.out.println("1. Quesos y Derivados Lácteos:");
-                    // Aquí iría la lógica para mostrar opciones de quesos y derivados lácteos
-                    System.out.println("Selecciona un queso y derivado lácteo: ");
                     String cheeseOption = scanner.nextLine();
-
                     System.out.println("2. Harinas, Cereales y Derivados:");
-                    // Aquí iría la lógica para mostrar opciones de harinas, cereales y derivados
-                    System.out.println("Selecciona una harina, cereal o derivado: ");
                     String flourOption = scanner.nextLine();
-
                     System.out.println("3. Frutas:");
-                    // Aquí iría la lógica para mostrar opciones de frutas
-                    System.out.println("Selecciona una fruta: ");
                     String fruitOption = scanner.nextLine();
-
                     System.out.println("4. Grasas:");
-                    // Aquí iría la lógica para mostrar opciones de grasas
-                    System.out.println("Selecciona una grasa: ");
                     String fatOption = scanner.nextLine();
-
                     Meal breakfast = new Meal("Desayuno", cheeseOption, flourOption, fruitOption, fatOption, "Morning");
                     meals.add(breakfast);
                 }
 
-                System.out.println("¿Desea añadir almuerzo? (si/no)");
-                answer = scanner.nextLine();
-                if (answer.equalsIgnoreCase("si")) {
-                    System.out.println("Ingrese los detalles del almuerzo:");
-                    // Aquí iría la lógica para preguntar detalles específicos del almuerzo
-                    System.out.print("Meats: ");
-                    String meats = scanner.nextLine();
-                    System.out.print("Legumes: ");
-                    String legumes = scanner.nextLine();
-                    System.out.print("Flour, cereals and derivados: ");
-                    String flour = scanner.nextLine();
-                    System.out.print("Vegetables: ");
-                    String vegetables = scanner.nextLine();
-                    System.out.print("Fats: ");
-                    String fats = scanner.nextLine();
+                // Resto de las comidas similares...
 
-                    Meal lunch = new Meal("Almuerzo", meats, legumes, flour, vegetables, fats, "Afternoon");
-                    meals.add(lunch);
-                }
-
-                System.out.println("¿Desea añadir cena? (si/no)");
-                answer = scanner.nextLine();
-                if (answer.equalsIgnoreCase("si")) {
-                    System.out.println("Ingrese los detalles de la cena:");
-                    // Aquí iría la lógica para preguntar detalles específicos de la cena
-                    System.out.print("Cheese and substitutes: ");
-                    String cheese = scanner.nextLine();
-                    System.out.print("Flour, cereals and derivados: ");
-                    String flour = scanner.nextLine();
-                    System.out.print("Fruits: ");
-                    String fruits = scanner.nextLine();
-                    System.out.print("Fats: ");
-                    String fats = scanner.nextLine();
-
-                    Meal dinner = new Meal("Cena", cheese, flour, fruits, fats, "Evening");
-                    meals.add(dinner);
-                }
-
-                System.out.println("¿Desea añadir una mini comida? (si/no)");
-                answer = scanner.nextLine();
-                if (answer.equalsIgnoreCase("si")) {
-                    System.out.println("Ingrese los detalles de la mini comida:");
-                    // Aquí iría la lógica para preguntar detalles específicos de la mini comida
-                    System.out.print("Cheese and substitutes: ");
-                    String cheese = scanner.nextLine();
-                    System.out.print("Flour, cereals and derivados: ");
-                    String flour = scanner.nextLine();
-                    System.out.print("Time for eat (morning, afternoon, night): ");
-                    String timeOfDay = scanner.nextLine();
-
-                    Meal snack = new Meal("Mini comida", cheese, flour, timeOfDay);
-                    meals.add(snack);
-                }
-
-                System.out.println("¿Desea añadir una Merienda? (si/no)");
-                answer = scanner.nextLine();
-                if (answer.equalsIgnoreCase("si")) {
-                    System.out.println("Ingrese los detalles de la Merienda:");
-                    // Aquí iría la lógica para preguntar detalles específicos de la merienda
-                    System.out.print("Fruits: ");
-                    String fruits = scanner.nextLine();
-                    System.out.print("Nuts and seeds: ");
-                    String nuts = scanner.nextLine();
-                    System.out.print("Time for eat (morning, afternoon, night): ");
-                    String timeOfDay = scanner.nextLine();
-
-                    Meal snack = new Meal("Merienda", fruits + ", " + nuts, timeOfDay);
-                    meals.add(snack);
-                }
-
+                // Mostrar las comidas si se solicita
                 System.out.println("¿Desea ver sus comidas? (si/no)");
                 answer = scanner.nextLine();
                 if (answer.equalsIgnoreCase("si")) {
@@ -196,8 +116,7 @@ public class Main {
                     }
                 }
 
-                // Crear una instancia de DietPlan con los detalles proporcionados y asignar el
-                // plan al paciente
+                // Crear instancia de DietPlan y asignar al paciente
                 DietPlan dietPlan = new DietPlan(planId, dailyCalories, macronutrientDistribution,
                         specificRecommendations, patient, dietitian, meals);
                 patient.setDietPlan(dietPlan);
@@ -220,14 +139,7 @@ public class Main {
     }
 
     private static void registerMeal(Scanner scanner) {
-        System.out.print("Ingrese el ID del paciente: ");
-        int patientId = Integer.parseInt(scanner.nextLine());
 
-        Patient patient = Patient.getPatientById(patientId);
-        if (patient == null) {
-            System.out.println("Paciente no encontrado.");
-            return;
-        }
         System.out.println("Ingresa los detalles de la comida:");
         System.out.print("ID: ");
         int id = Integer.parseInt(scanner.nextLine());

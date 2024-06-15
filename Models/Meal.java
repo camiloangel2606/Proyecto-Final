@@ -140,11 +140,13 @@ public class Meal {
     public static void addMealToCSV(String fileName, int id, String name, float portion) {
         String[] mealData = { String.valueOf(id), name, String.valueOf(portion) };
 
-        try (FileWriter writer = new FileWriter(fileName, true)) {
+        try (FileWriter writer = new FileWriter(fileName, true);
+                PrintWriter pw = new PrintWriter(writer)) {
             for (String data : mealData) {
-                writer.append(data).append(",");
+                pw.print(data);
+                pw.print(",");
             }
-            writer.append("\n");
+            pw.println();
             System.out.println("Comida agregada exitosamente al archivo " + fileName);
         } catch (IOException e) {
             System.out.println("Ocurrió un error al escribir en el archivo CSV: " + e.getMessage());
