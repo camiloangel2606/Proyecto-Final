@@ -238,7 +238,6 @@ public class Main {
         do {
             System.out.println(DIETITIAN_MENU_TITLE);
             System.out.println("(1) Register a new dietitian.");
-            System.out.println("(2) Assign a dietitian to a patient.");
             System.out.println("(0) Return to main menu.");
             option = Integer.parseInt(scanner.nextLine());
 
@@ -246,9 +245,6 @@ public class Main {
             switch (option) {
                 case 1:
                     registerDietitian(scanner);
-                    break;
-                case 2:
-                    assignDietitianToPatient(scanner);
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
